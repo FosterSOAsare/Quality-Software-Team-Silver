@@ -2,21 +2,37 @@
 
 Deadline: **2 November 2026**.
 
+## Tests: done
+
+All tests pass on the live site (last parallel run: 19 of 19).
+
+| Requirement | Target | Have |
+|---|---|---|
+| Passing UI tests | 8–10 | 10 |
+| Failure-oriented UI test | 1 | 1 (UI-F01) |
+| Data-driven UI test | 1 or more | 1 (UI-001) |
+| Passing API tests | 4–8 | 6 |
+| Required UI controls | All 9 | All 9 |
+| Genuine failure investigation | 1 | 6 (`docs/failure-log.md`) |
+
+The repo is on GitHub: `FosterSOAsare/Quality-Software-Team-Silver`.
+
 ## Deliverables
 
 | | Deliverable | Status |
 |---|---|---|
-| A | Source code (framework, config, test data, dependencies), emailed to the instructor | All tests written and passing on the live site |
+| A | Source code (framework, config, test data, dependencies), emailed to the instructor | Done and on GitHub: still to be emailed |
 | B | PowerPoint | Not started |
 | C | Live demo | Not rehearsed |
 | D | README | Done: still needs a clean-machine check |
-| E | Test inventory (`docs/test-inventory.md`) | Done, including the upload tests |
+| E | Test inventory (`docs/test-inventory.md`) | Summary done: per-test details still to add |
 | F | Individual contribution record | Not started |
 
 ### A. Source code
 
-- [x] Write the 3 upload tests
-- [x] Get them passing on the live site (see "Remaining UI tests" below)
+- [x] Write all UI and API tests and get them passing on the live site
+- [x] Put the repo on GitHub and share it with the team
+- [ ] Share the admin passcode with teammates privately (it is not in the repo)
 - [ ] Email the project to the instructor (muhammad.fatani@ext.junia.com), without `.env`
 
 ### B. PowerPoint
@@ -50,7 +66,7 @@ Deadline: **2 November 2026**.
 
 ### D. README
 
-- [ ] Clean-machine check: someone else sets up and runs the project using only the README
+- [ ] Clean-machine check: a teammate clones the repo and runs it using only the README
 
 ### E. Test inventory and per-test documentation
 
@@ -59,19 +75,3 @@ Deadline: **2 November 2026**.
 ### F. Individual contribution record
 
 - [ ] For each member: area, files or modules, and what they can explain
-
-## Remaining UI tests
-
-UI-008, UI-009 and UI-F01 are written (`tests/ui/event_uploads.robot`) and pass on the live site.
-
-- [x] Add image upload and an optional PDF/Word "Event Details" upload to the event form
-- [x] Set up the Cloudinary unsigned upload preset
-- [x] Write UI-008 (image upload), UI-009 (document upload) and UI-F01 (unsupported file rejected)
-- [x] Add sample files to `test-data/files/`
-- [x] Add the tests to `docs/test-inventory.md`
-- [x] In Vercel (frontend project), add `VITE_CLOUDINARY_CLOUD_NAME` and `VITE_CLOUDINARY_UPLOAD_PRESET`, then redeploy
-- [x] Merge and deploy the backend branch `feat/event-file-uploads`, so the server stores the details document
-- [x] Re-run the upload tests on the live site and close FL-006
-- [x] Take the evidence screenshots for UI-008, UI-009 and UI-F01 from the live site
-- [x] Run the full suite in parallel and update the "Last full run" line in `docs/test-inventory.md`
-- [ ] Deploy `fix/image-picker` ("Choose image for the event"), then retake the UI-008 and UI-F01 screenshots
