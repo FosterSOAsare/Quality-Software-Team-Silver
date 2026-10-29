@@ -1,18 +1,28 @@
 """Builds test data that is unique per run and clearly marked as test data.
 
-Unique values let tests run in parallel against the live site without
-clashing, and the [TEST] prefix makes any leftover record easy to spot.
+The event itself comes from test-data/sample_event.json, so the UI and API tests
+use the same realistic event. Unique values let tests run in parallel against the
+live site without clashing, and the [TEST] prefix makes any leftover record easy
+to spot.
 """
 
+import json
 import uuid
 from datetime import date, timedelta
+from pathlib import Path
+
+SAMPLE_EVENT_FILE = Path(__file__).parent.parent / "test-data" / "sample_event.json"
 
 
 class TestDataFactory:
     ROBOT_LIBRARY_SCOPE = "GLOBAL"
 
+    def sample_event(self):
+        """The sample event exactly as written in test-data/sample_event.json."""
+        return json.loads(SAMPLE_EVENT_FILE.read_text(encoding="utf-8"))
+
     def unique_event_title(self):
-        return f"[TEST] Event {self._short_id()}"
+        return f"[TEST] {self.sample_event()['title']} {self._short_id()}"
 
     def unique_email(self):
         return f"test+{self._short_id()}@example.com"
@@ -28,15 +38,16 @@ class TestDataFactory:
         return (date.today() - timedelta(days=int(days_ago))).isoformat()
 
     def valid_event_payload(self):
-        """A complete, valid body for POST /events, with one unlimited ticket."""
+        """A complete, valid body for POST /events, built from the sample event."""
+        event = self.sample_event()
         return {
             "title": self.unique_event_title(),
             "date": self.future_date(),
-            "time": "19:00",
-            "location": "Rooftop Lounge",
-            "desc": "Automated test event. Safe to delete.",
-            "leadImage": "https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=1200&auto=format&fit=crop",
-            "tickets": [{"type": "General Admission", "price": 50, "totalQuantity": None}],
+            "time": event["time"],
+            "location": event["location"],
+            "desc": event["desc"],
+            "leadImage": event["leadImage"],
+            "tickets": event["tickets"],
         }
 
     def _short_id(self):

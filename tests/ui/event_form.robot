@@ -21,7 +21,7 @@ UI-006 Ticket Quantity Limit Must Be At Least 1
     ...                The field only exists while the ticket has a quantity limit.
     [Tags]    number-input    boundary    dynamic-element    negative
     Enter Valid Event Details
-    Add Ticket    General Admission    50
+    Add Ticket    General Admission    150
     Add Quantity Limit
     Quantity Limit Field Should Be Shown
 

@@ -26,11 +26,11 @@ UI-007 Ticket Dialog Shows Event Tickets And Closes
 
     Open Ticket Dialog
     Ticket Dialog Should Be Open
-    Ticket Dialog Should List    General Admission    50
-    Total Amount Should Be    50
+    Ticket Dialog Should List    General Admission    150
+    Total Amount Should Be    150
 
     Increase Ticket Quantity
-    Total Amount Should Be    100
+    Total Amount Should Be    300
     Capture Evidence    UI-007-ticket-dialog-open
 
     Close Ticket Dialog

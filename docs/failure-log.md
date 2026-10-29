@@ -140,3 +140,34 @@ up to the browser timeout. No `Sleep` was added.
 
 **Prevention.** Any check that follows a server call waits with `Wait For Condition` or
 `Wait For Elements State`. The keyword's documentation explains why.
+
+---
+
+## FL-006: Upload tests time out on the live site
+
+| | |
+|---|---|
+| **Date** | 29 Oct 2026 |
+| **Tests** | UI-008, UI-009, and UI-006 (which now uploads an image while filling the form) |
+| **Error** | `TimeoutError: locator.waitFor: Timeout 15000ms exceeded` while waiting for the uploaded file's name |
+| **Root cause category** | Environment issue (closed) |
+
+**Investigation.** UI-F01 passed while every test that needs a real upload failed, which pointed away
+from the tests. The failure screenshot shows the app's own message under the image field:
+**"File uploads are not configured."** The app shows this when `VITE_CLOUDINARY_CLOUD_NAME` and
+`VITE_CLOUDINARY_UPLOAD_PRESET` are missing. Vite builds these into the site at build time, so the
+live build was made without them. To confirm the tests themselves are right, the same four tests were
+run against a local build that has the two settings (`--variable BASE_URL:http://localhost:5173`):
+**4 of 4 passed**.
+
+**Evidence.** `evidence/failures/FL-006-uploads-not-configured-on-live-site.png`
+
+**Corrective action.** Add both Cloudinary variables to the frontend project in Vercel and redeploy.
+No test was changed: the expected behaviour (an uploaded image shows its name and preview) is right.
+
+**Verification.** After the settings were added in Vercel and the site redeployed, the same four
+tests were re-run against the live site: **4 of 4 passed**. The full suite then passed in parallel
+(18 of 18).
+
+**Prevention.** The README lists every setting the app needs. When the upload tests fail with a
+timeout, the first thing to check is the message under the field, which names this exact cause.

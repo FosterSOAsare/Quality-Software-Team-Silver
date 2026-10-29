@@ -23,7 +23,12 @@ while `CAPTURE_EVIDENCE=true` is set in `.env` (or with `--variable CAPTURE_EVID
 | `UI-005-message-9-characters-rejected.png` | UI-005 | `Message must be at least 10 characters` for a 9-character message; every other field valid, so it is the only error |
 | `UI-005-message-multi-line-accepted.png` | UI-005 | A three-line message kept in the text area |
 | `UI-006-quantity-0-rejected.png` | UI-006 | `Quantity must be at least 1` under a quantity of 0 |
-| `UI-007-ticket-dialog-open.png` | UI-007 | The ticket dialog for an event created through the API, total at `GHS100` after `+` |
+| `UI-007-ticket-dialog-open.png` | UI-007 | The ticket dialog for an event created through the API, total at `GHS300` after `+` |
+| `UI-008-event-image-uploaded.png` | UI-008 | The uploaded `jazz-night.jpg` with its name and a preview loaded from Cloudinary |
+| `UI-009-details-document-uploaded.png` | UI-009 | The uploaded `jazz-night-programme.pdf` shown in the Event Details field |
+| `UI-010-details-wrong-format-rejected.png` | UI-010 | `Please choose a PDF or Word document` after choosing a photo as the details document; nothing uploaded |
+| `UI-F01-unsupported-file-rejected.png` | UI-F01 | `Please choose a JPG, PNG or WEBP image` after choosing a text file; nothing uploaded |
+| `event-page-with-image-and-details-file.png` | UI-008, UI-009 | A full event created through the live form, then opened on its own page: the uploaded photo, the description, and the "Event details" link to the uploaded programme PDF. The event was deleted straight after |
 
 ## `failures/`: the failures in `docs/failure-log.md`
 
@@ -39,6 +44,7 @@ Each one failed with the same error as the original.
 | `FL-004-quantity-0-without-error.png` | FL-004 Application defect | Timed out waiting for `Quantity must be at least 1`: the app before its fix showed no message |
 | `FL-004-log/log.html` | FL-004 | The full Robot log of that failed run, with its screenshot |
 | `FL-005-login-still-verifying.png` | FL-005 Synchronization issue | `URL '.../admin/login' (str) should be '.../bookings' (str)`, taken while the button still read `VERIFYING...` |
+| `FL-006-uploads-not-configured-on-live-site.png` | FL-006 Environment issue | Timed out waiting for the uploaded file's name. The screenshot shows why: the live site says "File uploads are not configured." (taken from the real failing run, not recreated) |
 
 The fix for each failure is described in `docs/failure-log.md`. For FL-004, compare
 `failures/FL-004-quantity-0-without-error.png` (before the fix) with

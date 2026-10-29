@@ -1,20 +1,20 @@
 # Test Inventory
 
 Last full run: 29 Oct 2026, against https://amethyst-sd.vercel.app, in parallel
-(`pabot --processes 4`): **15 of 15 report entries pass.**
+(`pabot --processes 4`): **19 of 19 report entries pass.**
 
 ## Target (from the assignment)
 
 | Requirement | Target | Current |
 |---|---|---|
-| Passing UI tests | 8–10 | 7 (9 once the upload tests are added) |
-| Failure-oriented UI test | 1 | 0 (planned: UI-F01) |
+| Passing UI tests | 8–10 | 10 |
+| Failure-oriented UI test | 1 | 1 (UI-F01) |
 | Data-driven UI test | At least 1 | 1 (UI-001, 3 data rows) |
 | Passing API tests | 4–8 | 6 |
-| Genuine failure investigation | 1 | 5 logged in `failure-log.md` |
+| Genuine failure investigation | 1 | 6 logged in `failure-log.md` |
 
 UI-001 is one test case run over 3 data rows. The Robot report lists each row separately,
-so the report shows 15 entries for these 13 test cases.
+so the report shows 19 entries for these 17 test cases.
 
 ## UI tests
 
@@ -25,8 +25,12 @@ so the report shows 15 entries for these 13 test cases.
 | UI-003 | Calendar Disables Past Dates | Date validation, negative | Every day before today is disabled | Pass |
 | UI-004 | Guest Details Can Be Edited Cleared And Validated | Text input, field validation, negative | Field holds `Jane`, then `Janet`, then is empty; invalid details show three exact messages | Pass |
 | UI-005 | Message Text Area Enforces Minimum Length And Keeps Multi-Line Text | Text area, boundary, negative | 9 characters rejected, 10 accepted, three-line message kept exactly | Pass |
-| UI-006 | Ticket Quantity Limit Must Be At Least 1 | Number input, boundary, dynamic element, negative | Field appears on "Add Quantity Limit"; 0 shows `Quantity must be at least 1`; 1 clears it; field disappears on "Make Unlimited" | Pass (failed first on app defect FL-004; fixed and deployed) |
-| UI-007 | Ticket Dialog Shows Event Tickets And Closes | Dialog, state verification, dynamic element | Event created via API shows its title; dialog opens listing `General Admission` at `GHS50`; total goes `GHS50` → `GHS100`; dialog closes | Pass |
+| UI-006 | Ticket Quantity Limit Must Be At Least 1 | Number input, boundary, dynamic element, negative | Field appears on "Add Quantity Limit"; 0 shows `Quantity must be at least 1`; 1 clears it; field disappears on "Make Unlimited" | Pass (failed first on app defect FL-004, fixed; later on FL-006, fixed) |
+| UI-007 | Ticket Dialog Shows Event Tickets And Closes | Dialog, state verification, dynamic element | Event created via API shows its title; dialog opens listing `General Admission` at `GHS150`; total goes `GHS150` → `GHS300`; dialog closes | Pass |
+| UI-008 | Event Image Upload Shows Preview And File Name | Image upload, positive | With the fields above it filled in, `jazz-night.jpg` uploads; its name is shown and its preview is loaded from `res.cloudinary.com` | Pass |
+| UI-009 | Event Details Document Upload Shows File Name And Can Be Removed | File upload, dynamic element, positive | `jazz-night-programme.pdf` uploads and its name is shown; after "Remove" the name disappears | Pass |
+| UI-010 | Event Details Rejects A File In The Wrong Format | File validation, negative | Choosing the photo `jazz-night.jpg` as the details document shows exactly `Please choose a PDF or Word document`; nothing is uploaded | Pass |
+| UI-F01 | Event Image Rejects A File That Is Not An Image | Failure-oriented, file validation, negative | `not-an-image.txt` shows exactly `Please choose a JPG, PNG or WEBP image`; nothing is uploaded | Pass |
 
 ## API tests
 
@@ -42,13 +46,7 @@ so the report shows 15 entries for these 13 test cases.
 Admin auth comes from `ADMIN_PASSCODE` in `.env`. The token and passcode never appear in
 `log.html` or `output.xml` (checked after every run during development).
 
-## Planned UI tests
-
-| ID | Control | Idea | Blocked by |
-|---|---|---|---|
-| UI-008 | Image upload | Event image accepts a JPG and shows its file name | Cloudinary upload feature |
-| UI-009 | File upload | Event brief accepts a PDF and shows its file name | File upload feature (on hold) |
-| UI-F01 | Failure-oriented | Image upload rejects an unsupported file type | Cloudinary upload feature |
+Sample upload files are in `test-data/files/`. The sample event used by the UI and API tests is `test-data/sample_event.json`.
 
 ## Mandatory control coverage
 
@@ -57,23 +55,23 @@ Admin auth comes from `ADMIN_PASSCODE` in `.env`. The token and passcode never a
 | Text input | UI-004 | Done |
 | Number input | UI-006 | Done |
 | Text area | UI-005 | Done |
-| File upload | UI-009 | On hold |
-| Image upload | UI-008, UI-F01 | Planned |
+| File upload | UI-009, UI-010 | Done |
+| Image upload | UI-008, UI-F01 | Done |
 | Dropdown | UI-002 | Done |
 | Date picker | UI-003 | Done |
 | Dialog | UI-007 | Done |
-| Dynamic elements | UI-006, UI-007 | Done |
+| Dynamic elements | UI-006, UI-007, UI-009 | Done |
 
 ## Coverage types
 
 | Type | Covered by |
 |---|---|
-| Positive | UI-001, UI-002, UI-007, API-001, API-005 |
-| Negative | UI-003, UI-004, UI-005, UI-006, API-002, API-003, API-004, API-006 |
+| Positive | UI-001, UI-002, UI-007, UI-008, UI-009, API-001, API-005 |
+| Negative | UI-003, UI-004, UI-005, UI-006, UI-010, UI-F01, API-002, API-003, API-004, API-006 |
 | Boundary | UI-005, UI-006, API-006 |
 | Field / data validation | UI-004, API-006 |
 | Date validation | UI-003, API-006 |
-| Dynamic element | UI-006, UI-007 |
+| Dynamic element | UI-006, UI-007, UI-009 |
 | Dialog handling | UI-007 |
 | State verification | UI-007 (API-created event shown in the UI) |
 | Data-driven | UI-001 |
@@ -81,7 +79,7 @@ Admin auth comes from `ADMIN_PASSCODE` in `.env`. The token and passcode never a
 | Auth / authorization | API-001, API-002, API-003 |
 | CRUD | API-005 |
 | Headers | API-001 |
-| File validation | Planned (UI-F01) |
+| File validation | UI-010 (document field), UI-F01 (image field) |
 
 ## App gaps found while testing
 

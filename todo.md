@@ -1,30 +1,77 @@
 # To Do
 
-Remaining UI tests. All three depend on file upload, which the app does not have yet.
-We have 7 passing UI tests and need at least 8, so at least one of these is required.
+Deadline: **2 November 2026**.
 
-## UI-008 Image upload
+## Deliverables
 
-- [ ] Add image upload to the event form in the app (upload straight to Cloudinary, then save the image URL)
-- [ ] Get the Cloudinary cloud name and an unsigned upload preset (allowed formats `jpg, png, webp`, max 5 MB)
-- [ ] Write the test: upload a valid JPG and check its file name is shown
-- [ ] Add the test to `docs/test-inventory.md`
+| | Deliverable | Status |
+|---|---|---|
+| A | Source code (framework, config, test data, dependencies), emailed to the instructor | All tests written and passing on the live site |
+| B | PowerPoint | Not started |
+| C | Live demo | Not rehearsed |
+| D | README | Done: still needs a clean-machine check |
+| E | Test inventory (`docs/test-inventory.md`) | Done, including the upload tests |
+| F | Individual contribution record | Not started |
 
-## UI-F01 Unsupported file is rejected (the required failure-oriented test)
+### A. Source code
 
-- [ ] Uses the same image upload as UI-008
-- [ ] Write the test: upload a file that is not an image (e.g. `.txt`) and check the exact error message
-- [ ] Add the test to `docs/test-inventory.md`
+- [x] Write the 3 upload tests
+- [x] Get them passing on the live site (see "Remaining UI tests" below)
+- [ ] Email the project to the instructor (muhammad.fatani@ext.junia.com), without `.env`
 
-## UI-009 File upload (PDF)
+### B. PowerPoint
 
-- [ ] Decide where it goes (event form "event brief", or the contact page)
-- [ ] Add PDF upload to the app: check type and size, show an error for bad files, show the file's name
-- [ ] Write the test: upload a valid PDF and check its file name is shown
-- [ ] Add the test to `docs/test-inventory.md`
+- [ ] Title and team members
+- [ ] The app and why we chose it
+- [ ] Tool and language, and why (Robot Framework, Python)
+- [ ] Architecture (page objects, API client, libraries, config)
+- [ ] Design principles and naming conventions
+- [ ] Test strategy
+- [ ] UI coverage and results
+- [ ] API coverage and results
+- [ ] The data-driven test (UI-001)
+- [ ] Test independence and parallel execution
+- [ ] Challenges
+- [ ] One failure investigation (suggested: FL-004, quantity of 0 accepted)
+- [ ] Each member's specific contribution
+- [ ] Lessons learned
 
-## For all three
+### C. Live demo
 
-- [ ] Add sample files to `test-data/files/` (valid JPG, valid PDF, an unsupported file)
-- [ ] Add a `Capture Evidence` step at each test's key check
-- [ ] Run the full suite in parallel and update the "Last full run" line in `docs/test-inventory.md`
+- [ ] Launch the app
+- [ ] Run the UI tests
+- [ ] Run the API tests
+- [ ] Show assertions in the code
+- [ ] Show the data-driven test
+- [ ] Show a parallel run
+- [ ] Explain the failure investigation
+- [ ] Show the reports
+- [ ] Rehearse, including answering questions on any part of the code
+
+### D. README
+
+- [ ] Clean-machine check: someone else sets up and runs the project using only the README
+
+### E. Test inventory and per-test documentation
+
+- [ ] For every test, add preconditions, test data, steps, actual result and evidence (brief §4 and §5)
+
+### F. Individual contribution record
+
+- [ ] For each member: area, files or modules, and what they can explain
+
+## Remaining UI tests
+
+UI-008, UI-009 and UI-F01 are written (`tests/ui/event_uploads.robot`) and pass on the live site.
+
+- [x] Add image upload and an optional PDF/Word "Event Details" upload to the event form
+- [x] Set up the Cloudinary unsigned upload preset
+- [x] Write UI-008 (image upload), UI-009 (document upload) and UI-F01 (unsupported file rejected)
+- [x] Add sample files to `test-data/files/`
+- [x] Add the tests to `docs/test-inventory.md`
+- [x] In Vercel (frontend project), add `VITE_CLOUDINARY_CLOUD_NAME` and `VITE_CLOUDINARY_UPLOAD_PRESET`, then redeploy
+- [x] Merge and deploy the backend branch `feat/event-file-uploads`, so the server stores the details document
+- [x] Re-run the upload tests on the live site and close FL-006
+- [x] Take the evidence screenshots for UI-008, UI-009 and UI-F01 from the live site
+- [x] Run the full suite in parallel and update the "Last full run" line in `docs/test-inventory.md`
+- [ ] Deploy `fix/image-picker` ("Choose image for the event"), then retake the UI-008 and UI-F01 screenshots

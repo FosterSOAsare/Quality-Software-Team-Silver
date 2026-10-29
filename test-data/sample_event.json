@@ -1,0 +1,12 @@
+{
+  "title": "Rooftop Jazz & Wine Evening",
+  "time": "19:00",
+  "location": "Rooftop Lounge",
+  "desc": "An evening of live jazz from The Amethyst Quartet on our rooftop, paired with a guided tasting of four wines from our sommelier and small plates from the kitchen. The full programme, dress code and ticket details are in the attached event details document.",
+  "leadImage": "https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=70&w=1200&auto=format&fit=crop",
+  "imageFile": "jazz-night.jpg",
+  "detailsFile": "jazz-night-programme.pdf",
+  "tickets": [
+    { "type": "General Admission", "price": 150, "totalQuantity": null }
+  ]
+}
