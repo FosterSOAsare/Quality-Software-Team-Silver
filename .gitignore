@@ -1,0 +1,14 @@
+.venv/
+.env
+__pycache__/
+reports/
+/pabot_results/
+/.pabotsuitenames
+/browser/
+/log.html
+/report.html
+/output.xml
+/playwright-log.txt
+
+# Local working notes, not part of the project
+PROJECT_BRIEF.md

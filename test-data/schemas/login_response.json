@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "POST /auth/login success response",
+  "type": "object",
+  "required": ["token", "admin"],
+  "properties": {
+    "token": { "type": "string", "minLength": 20 },
+    "admin": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" }
+      }
+    }
+  }
+}

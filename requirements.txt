@@ -1,0 +1,7 @@
+robotframework==7.1.1
+robotframework-browser==19.1.2
+robotframework-requests==0.9.7
+robotframework-pabot==4.0.6
+robotframework-datadriver==1.11.2
+jsonschema==4.23.0
+python-dotenv==1.0.1

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GET /events/:id response",
+  "type": "object",
+  "required": ["_id", "eventId", "title", "date", "time", "location", "desc", "leadImage", "tickets"],
+  "properties": {
+    "_id": { "type": "string" },
+    "eventId": { "type": "string", "pattern": "^EV_[0-9]{4,}$" },
+    "title": { "type": "string", "minLength": 3 },
+    "date": { "type": "string", "format": "date-time" },
+    "time": { "type": "string" },
+    "location": { "type": "string" },
+    "desc": { "type": "string", "minLength": 10 },
+    "leadImage": { "type": "string" },
+    "tickets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["_id", "type", "price", "totalQuantity", "availableQuantity"],
+        "properties": {
+          "_id": { "type": "string" },
+          "type": { "type": "string" },
+          "price": { "type": "number", "minimum": 0 },
+          "totalQuantity": { "type": ["integer", "null"], "minimum": 1 },
+          "availableQuantity": { "type": ["integer", "null"], "minimum": 0 }
+        }
+      }
+    }
+  }
+}

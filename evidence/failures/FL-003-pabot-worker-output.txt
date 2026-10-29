@@ -1,0 +1,12 @@
+FL-003: every test "failed" instantly under pabot (environment issue)
+
+1. pabot console: both tests FAILED within milliseconds, and 0 tests actually ran
+
+   2026-10-29 13:45:15.826140 [PID:19176] [0] [ID:1] FAILED Auth Api.API-002 Admin Login With Wrong Passcode Is Rejected
+   2026-10-29 13:45:15.839300 [PID:13740] [1] [ID:0] FAILED Auth Api.API-001 Admin Login With Correct Passcode Returns A Token
+   0 tests, 0 passed, 0 failed, 0 skipped.
+
+2. The cause, in the worker's error output (reports/pabot_results/0/robot_stderr.out):
+
+   'robot' is not recognized as an internal or external command,
+   operable program or batch file.
