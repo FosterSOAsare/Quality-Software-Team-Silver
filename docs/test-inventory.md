@@ -97,13 +97,15 @@ Fixed and deployed:
 - New event ids were made by reading the last id and adding 1, so parallel creates could clash.
   Now an atomic counter. Checked on the live API: 6 events created at the same moment got 6
   different ids. Backend.
+- The booking form's "6+" guest button sent `Number("6+")`, which is `NaN`, so every booking for
+  six or more guests was rejected. The last button is now "6", and both the form and the server
+  only accept 1 to 6 guests: 7 or more gets "A booking can have at most 6 guests". Frontend
+  (deployed) and backend (merged; the live API was not yet enforcing it on 1 Nov 2026).
 
 Still open:
 
 - The event page shows the raw stored date (`2026-11-28T00:00:00.000Z`) instead of a readable one
   (see `evidence/screenshots/UI-007-ticket-dialog-open.png`).
-- The booking form's "6+" guest button sends `Number("6+")`, which is `NaN`, so every 6+ booking
-  is rejected (400 "Guests must be at least 1").
 - The booking calendar sets a `checkIn` / `checkOut` error but never displays its message. Only the
   border colour changes, so "Please select a check-in date" cannot be asserted as text.
 - No element has a `data-testid` yet. Locators use form `name` attributes, placeholders, roles and
