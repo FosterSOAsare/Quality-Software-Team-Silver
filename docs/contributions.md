@@ -20,6 +20,27 @@ Repository: `https://github.com/FosterSOAsare/Quality-Software-Team-Silver`
 
 ***
 
+## What each member can explain
+
+Foster wrote the tests. So that every member can explain part of the code, the UI and API
+tests were split between all five members. Each member can walk through their tests, the page
+resources and keywords those tests use, and what each assertion checks.
+
+| Member | UI tests | API tests | Files to know |
+| ------ | -------- | --------- | ------------- |
+| Foster Solomon Owusu ASARE | UI-008, UI-009, UI-010, UI-F01 (uploads) | API-001, API-002 (admin login) | `tests/ui/event_uploads.robot`, `tests/api/auth_api.robot`, `resources/pages/event_form_page.resource`, `resources/pages/admin_login_page.resource`, `resources/api/api_client.resource` |
+| Kwasi ASARE-BOATENG | UI-002, UI-003, UI-004 (booking page) | API-003 (bookings need a token) | `tests/ui/booking.robot`, `tests/api/bookings_api.robot`, `resources/pages/booking_page.resource` |
+| Joshua Akwasi DONKOR | UI-001 (data-driven navigation), UI-005 (contact message) | API-004 (unknown booking reference) | `tests/ui/navigation.robot`, `tests/ui/contact.robot`, `tests/api/bookings_api.robot`, `resources/pages/site_header.resource`, `resources/pages/contact_page.resource` |
+| Jasmine AMANKWAH | UI-006 (ticket quantity) | API-006 (past event date) | `tests/ui/event_form.robot`, `tests/api/events_api.robot`, `resources/pages/event_form_page.resource`, `libraries/TestDataFactory.py` |
+| Chloé DEMANZE | UI-007 (ticket dialog) | API-005 (event create, read, update, delete) | `tests/ui/event_details.robot`, `tests/api/events_api.robot`, `resources/pages/event_details_page.resource`, `libraries/SchemaValidator.py`, `test-data/schemas/event.json` |
+
+Every member can also explain the shared structure: test files call keywords from
+`resources/`, which hold the locators (UI) and HTTP calls (API); `resources/common.resource`
+opens the browser and holds shared checks; `config/env.py` reads the settings from `.env`.
+Foster can explain any part of the framework and the failure investigations in `docs/failure-log.md`.
+
+***
+
 ## Details per member
 
 ### Foster Solomon Owusu ASARE
